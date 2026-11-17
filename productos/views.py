@@ -9,6 +9,7 @@ from django.views.generic import (
 )
 
 from .models import Producto
+from .forms import ProductoForm
 
 
 class ProductoListView(LoginRequiredMixin, ListView):
@@ -25,37 +26,19 @@ class ProductoDetailView(LoginRequiredMixin, DetailView):
 
 class ProductoCreateView(LoginRequiredMixin, CreateView):
     model = Producto
-
-    fields = [
-        "nombre",
-        "descripcion",
-        "precio",
-        "stock",
-    ]
-
+    form_class = ProductoForm
     template_name = "productos/producto_form.html"
-
     success_url = reverse_lazy("producto-list")
 
 
 class ProductoUpdateView(LoginRequiredMixin, UpdateView):
     model = Producto
-
-    fields = [
-        "nombre",
-        "descripcion",
-        "precio",
-        "stock",
-    ]
-
+    form_class = ProductoForm
     template_name = "productos/producto_form.html"
-
     success_url = reverse_lazy("producto-list")
 
 
 class ProductoDeleteView(LoginRequiredMixin, DeleteView):
     model = Producto
-
     template_name = "productos/producto_confirm_delete.html"
-
     success_url = reverse_lazy("producto-list")
